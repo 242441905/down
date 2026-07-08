@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鸣依 - 个人引导页</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 底部光点跟随容器 -->
+    <div class="glow-trail" id="glowTrail"></div>
+
+    <!-- 卡片边缘RGB光点容器 -->
+    <div class="card-sparkles" id="cardSparkles"></div>
+
+    <!-- 樱花花瓣容器 -->
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <!-- 浮动装饰元素 -->
+    <div class="decorations" id="decorations">
+        <div class="deco deco-circle" style="top:15%;left:8%;width:60px;height:60px;"></div>
+        <div class="deco deco-triangle" style="top:70%;right:10%;"></div>
+        <div class="deco deco-square" style="top:25%;right:15%;width:45px;height:45px;"></div>
+        <div class="deco deco-dot" style="top:55%;left:12%;width:20px;height:20px;"></div>
+        <div class="deco deco-ring" style="bottom:20%;right:8%;width:55px;height:55px;"></div>
+        <div class="deco deco-star" style="top:40%;left:30%;">✨</div>
+        <div class="deco deco-star" style="top:60%;right:25%;">⭐</div>
+    </div>
+
+    <!-- 主卡片 -->
+    <div class="main-card" id="mainCard">
+        <!-- 头像区域 -->
+        <div class="avatar-wrapper" id="avatarWrapper" ondblclick="triggerPetals()">
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring-outer"></div>
+            <img class="avatar-img"
+                 src="txti.jpg"
+                 alt="鸣依头像"
+                 loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="avatar-fallback" style="display:none; width:110px; height:110px; border-radius:50%; background:linear-gradient(135deg,#f8c8d8,#c8d8f8); align-items:center; justify-content:center; color:#fff; font-size:2.5rem;">
+                🌸
+            </div>
+            <div class="avatar-status">🟢 在线</div>
+            <div class="avatar-hint">双击头像看樱花雨 🌸</div>
+            <div class="avatar-wave"></div>
+        </div>
+
+        <!-- 名字 + 闪烁星星 + RGB渐变 -->
+        <div class="name-wrapper">
+            <span class="name-star left">⭐</span>
+            <h1 class="name">鸣依</h1>
+            <span class="name-star right">✨</span>
+        </div>
+
+        <!-- 标签行 -->
+        <div class="badge-row">
+            <span class="badge badge-otaku">🎌 中度二次元</span>
+            <span class="badge badge-design">🎨 设计师</span>
+            <span class="badge badge-create">✨ 创作者</span>
+            <span class="badge badge-code">💻 偶尔码字</span>
+            <span class="badge badge-coffee">☕ 咖啡依赖</span>
+            <span class="badge badge-cat">🐱 猫系人格</span>
+        </div>
+
+        <!-- 打字机效果简介 -->
+        <p class="sub-bio" id="typewriter"></p>
+
+        <!-- 分割装饰1：花瓣点线 -->
+        <div class="divider divider-floral">
+            <span>🌸</span>
+        </div>
+
+        <!-- 音乐播放器 -->
+        <div class="music-player" id="musicPlayer">
+            <div class="music-toggle" id="musicToggle" onclick="toggleMusic()">
+                <span class="music-icon" id="musicIcon">🎵</span>
+                <span class="music-text">妄想感伤代偿联盟</span>
+                <span class="music-status" id="musicStatus">点击播放</span>
+            </div>
+            <div class="music-embed" id="musicEmbed" style="display:none; margin-top:8px; border-radius:12px; overflow:hidden;">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0"
+                        width="100%" height="86"
+                        src="https://music.163.com/outchain/player?type=2&id=432486474&auto=0&height=66">
+                </iframe>
+            </div>
+            <p class="music-hint">🎵 妄想感伤代偿联盟 | 点击按钮展开播放器</p>
+        </div>
+
+        <!-- 分割装饰2：径向渐变 -->
+        <div class="divider divider-dot">
+            <span>🔗</span>
+        </div>
+
+        <!-- 社交链接区域 -->
+        <div class="social-links">
+            <a href="https://b23.tv/RUbI7UE" target="_blank" rel="noopener" class="social-btn bilibili">
+                <span class="social-icon-wrapper">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.223 3.086a1.278 1.278 0 0 0 0 2.558c.62 0 1.13.51 1.13 1.13v.585H4.647v-.585c0-.62.51-1.13 1.129-1.13a1.278 1.278 0 0 0 0-2.558C3.767 3.086 2 4.853 2 6.86v9.017c0 2.006 1.767 3.773 3.776 3.773.62 0 1.128-.51 1.128-1.13 0-.62-.509-1.129-1.129-1.129a1.52 1.52 0 0 1-1.518-1.514V8.488h15.486v7.389a1.52 1.52 0 0 1-1.518 1.514c-.62 0-1.129.51-1.129 1.13 0 .62.51 1.129 1.129 1.129C20.233 19.65 22 17.883 22 15.877V6.86c0-2.007-1.767-3.774-3.777-3.774zM6.634 9.771c-.697 0-1.262.565-1.262 1.262v1.514c0 .697.565 1.262 1.262 1.262.698 0 1.262-.565 1.262-1.262v-1.514c0-.697-.564-1.262-1.262-1.262zm5.366 0c-.697 0-1.262.565-1.262 1.262v1.514c0 .697.565 1.262 1.262 1.262.697 0 1.262-.565 1.262-1.262v-1.514c0-.697-.565-1.262-1.262-1.262z"/></svg>
+                </span>
+                <span class="social-label">B站主页</span>
+                <span class="social-arrow">→</span>
+            </a>
+            <a href="https://qm.qq.com/q/Z3lAI8Skww" target="_blank" rel="noopener" class="social-btn qq">
+                <span class="social-icon-wrapper">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168C2.545 18.853 2 20.2 2 20.2s2.3-.3 4.2-.9c1.7.6 3.6.9 5.8.9 5.523 0 10-4.477 10-10S17.523 2 12 2zm-1.5 14h-2c-.6 0-1-.4-1-1s.4-1 1-1h2v2zm5 0h-2v-2h2c.6 0 1 .4 1 1s-.4 1-1 1z"/></svg>
+                </span>
+                <span class="social-label">QQ</span>
+                <span class="social-arrow">→</span>
+            </a>
+            <a href="https://www.486fk.cn/shop/mysmli" target="_blank" rel="noopener" class="social-btn shop">
+                <span class="social-icon-wrapper">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.82 5.17A1 1 0 0 0 21 5H6.6l-.44-2.21a1 1 0 0 0-.98-.79H3a1 1 0 0 0 0 2h1.51l2.4 12.03a2.01 2.01 0 0 0 1.98 1.7h8.2a2.01 2.01 0 0 0 1.98-1.7l1.7-8.54a1 1 0 0 0-.95-1.15zM16.5 18h-8.2L6.68 8h11.28l-1.46 7.3a1 1 0 0 1-.99.7zM10 10a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1z"/></svg>
+                </span>
+                <span class="social-label">鸣依小店</span>
+                <span class="social-badge">NEW</span>
+                <span class="social-arrow">→</span>
+            </a>
+            <a href="https://www.486fk.cn/shop/mysmli" target="_blank" rel="noopener" class="social-btn download">
+                <span class="social-icon-wrapper">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><polyline points="7 11 12 16 17 11"/><line x1="12" y1="4" x2="12" y2="16"/></svg>
+                </span>
+                <span class="social-label">网页下载软件</span>
+                <span class="social-arrow">→</span>
+            </a>
+            <a href="https://link3.cc/taffy" target="_blank" rel="noopener" class="social-btn link">
+                <span class="social-icon-wrapper">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8l4 4-4 4"/></svg>
+                </span>
+                <span class="social-label">Link</span>
+                <span class="social-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- 强烈推荐板块 -->
+        <div class="ad-section">
+            <button class="ad-toggle-btn" id="recommendToggleBtn" onclick="toggleRecommend()" aria-expanded="false">
+                <span class="ad-toggle-icon">⭐</span>
+                <span class="ad-toggle-label">强烈推荐</span>
+                <span class="ad-toggle-arrow">▼</span>
+            </button>
+            <div class="ad-list-container" id="recommendListContainer">
+                <div class="ad-list">
+                    <a href="https://www.link3.cc/" target="_blank" rel="noopener" class="ad-card recommend-link">
+                        <div class="ad-number">01</div><div class="ad-info"><div class="ad-title">Link3</div><div class="ad-status">聚合分享</div></div>
+                    </a>
+                    <a href="https://pmnet.work/" target="_blank" rel="noopener" class="ad-card recommend-link">
+                        <div class="ad-number">02</div><div class="ad-info"><div class="ad-title">集合音游</div><div class="ad-status">音游下载站</div></div>
+                    </a>
+                    <a href="https://prprbako.kevin2106.top/#/" target="_blank" rel="noopener" class="ad-card recommend-link">
+                        <div class="ad-number">03</div><div class="ad-info"><div class="ad-title">phira资源下载站</div><div class="ad-status">资源</div></div>
+                    </a>
+                    <a href="https://phira.dmocken.top/" target="_blank" rel="noopener" class="ad-card recommend-link">
+                        <div class="ad-number">04</div><div class="ad-info"><div class="ad-title">Phira下载</div><div class="ad-status">音游</div></div>
+                    </a>
+                    <div class="ad-card"><div class="ad-number">05</div><div class="ad-info"><div class="ad-title">敬请期待</div><div class="ad-status">待定</div></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 广告商招租 -->
+        <div class="ad-section">
+            <button class="ad-toggle-btn" id="adToggleBtn" onclick="toggleAds()" aria-expanded="false">
+                <span class="ad-toggle-icon">📢</span>
+                <span class="ad-toggle-label">广告商招租</span>
+                <span class="ad-toggle-arrow">▼</span>
+            </button>
+            <div class="ad-list-container" id="adListContainer">
+                <div class="ad-list">
+                    <div class="ad-card"><div class="ad-number">01</div><div class="ad-info"><div class="ad-title">广告位招租</div><div class="ad-status">待定</div></div></div>
+                    <div class="ad-card"><div class="ad-number">02</div><div class="ad-info"><div class="ad-title">广告位招租</div><div class="ad-status">待定</div></div></div>
+                    <div class="ad-card"><div class="ad-number">03</div><div class="ad-info"><div class="ad-title">广告位招租</div><div class="ad-status">待定</div></div></div>
+                    <div class="ad-card"><div class="ad-number">04</div><div class="ad-info"><div class="ad-title">广告位招租</div><div class="ad-status">待定</div></div></div>
+                    <div class="ad-card"><div class="ad-number">05</div><div class="ad-info"><div class="ad-title">广告位招租</div><div class="ad-status">待定</div></div></div>
+                </div>
+                <div class="ad-contact">
+                    <p>📩 商务合作请联系：242441905@qq.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 随机图片板块 -->
+        <div class="ad-section">
+            <button class="ad-toggle-btn" id="imageToggleBtn" onclick="toggleRandomImage()" aria-expanded="false">
+                <span class="ad-toggle-icon">🖼️</span>
+                <span class="ad-toggle-label">随机图片</span>
+                <span class="ad-toggle-arrow">▼</span>
+            </button>
+            <div class="ad-list-container" id="imageContainer">
+                <div style="padding: 8px 0; text-align: center;">
+                    <img id="randomImage" src="" alt="随机图片" style="width:100%; border-radius:14px; display:none;" onload="this.style.display='block';">
+                    <p id="imageLoading" style="color: var(--text-secondary); font-size: 0.8rem; padding: 20px;">点击刷新获取新图片 🔄</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 随机语句板块 -->
+        <div class="ad-section">
+            <button class="ad-toggle-btn" id="quoteToggleBtn" onclick="toggleRandomQuote()" aria-expanded="false">
+                <span class="ad-toggle-icon">💬</span>
+                <span class="ad-toggle-label">随机语句</span>
+                <span class="ad-toggle-arrow">▼</span>
+            </button>
+            <div class="ad-list-container" id="quoteContainer">
+                <div style="padding: 12px 0; text-align: center;">
+                    <div id="randomQuote" style="background:rgba(255,255,255,0.6); border-radius:14px; padding:20px; min-height:80px; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:var(--text-primary); letter-spacing:0.03em; line-height:1.6; display:none;"></div>
+                    <p id="quoteLoading" style="color: var(--text-secondary); font-size: 0.8rem; padding: 20px;">点击刷新获取新语句 📝</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分割装饰3：波浪虚线 -->
+        <div class="divider divider-wave"></div>
+
+        <!-- 底部小字 -->
+        <div class="footer-note">
+            <p>© 2026 鸣依 | 保持热爱，奔赴山海 ✨</p>
+            <p class="footer-tagline">次元有壁，热爱无界 🎌</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
